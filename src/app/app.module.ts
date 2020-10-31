@@ -4,7 +4,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { LoginModule } from 'login/login.module';
-
+import { authenticationReducer } from '../login/reducers/auth.reducers'
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from 'login/effects/auth.effects';
 @NgModule({
   declarations: [
     AppComponent
@@ -12,9 +14,10 @@ import { LoginModule } from 'login/login.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LoginModule,
-    StoreModule.forRoot({})
-  ],
+    StoreModule.forRoot(authenticationReducer),
+    EffectsModule.forRoot([AuthEffects]),
+    LoginModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

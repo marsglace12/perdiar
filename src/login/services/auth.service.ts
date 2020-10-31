@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { LoginModule } from '../login.module';
 import firebase from 'firebase/app';
+import { from } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: LoginModule,
 })
 export class AuthService {
   constructor(public auth: AngularFireAuth) {}
 
   // Sign in with Google
   GoogleAuth() {
-    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    return from(
+      this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    );
   }
+
   logout() {
-    this.auth.signOut();
+    return from(this.auth.signOut());
   }
 }
