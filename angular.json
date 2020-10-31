@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "perdiar"
+    }
+  },
+  "defaultProject": "perdiar",
+  "cli": {
+    "analytics": "8e1f9cf1-ac0b-40f3-976e-65ea4223878e"
+  }
 }

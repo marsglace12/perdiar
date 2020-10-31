@@ -1,20 +1,35 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+      "baseUrl": "./src",
+      "downlevelIteration": true,
+      "module": "esnext",
+      "outDir": "./dist/out-tsc",
+      "sourceMap": true,
+      "declaration": false,
+      "moduleResolution": "node",
+      "noImplicitReturns": true,
+      "noImplicitAny": false,
+      "emitDecoratorMetadata": true,
+      "allowSyntheticDefaultImports": true,
+      "experimentalDecorators": true,
+      "target": "es2015",
+      "typeRoots": ["node_modules/@types"],
+      "lib": ["es2017", "dom"],
+      "resolveJsonModule": true
+  },
+  "include": ["src/**/*", "tools/**/*"],
+  "exclude": [
+      "src/locale/**/*.js",
+      "./tools/**/*.js",
+      "src/assets/js/*.js",
+      "builder.ts",
+      "server.ts"
+  ],
+  "angularCompilerOptions": {
+      "fullTemplateTypeCheck": true,
+      "strictInjectionParameters": true,
+      "trace": true,
+      "enableIvy": false
   }
 }
