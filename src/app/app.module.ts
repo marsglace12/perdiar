@@ -2,24 +2,28 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StoreModule } from '@ngrx/store';
 import { LoginModule } from 'app/login/login.module';
-import { authenticationReducer } from './login/reducers/auth.reducers'
-import { EffectsModule } from '@ngrx/effects';
-import { AuthEffects } from 'app/login/effects/auth.effects';
 import { AuthService } from 'app/login/services/auth.service';
-import { SignUpComponent } from './home/jmartin/repo/formation/perdiar/src/app/login/components/sign-up/sign-up.component';
+import { HomeComponent } from './home/home/home.component';
+import { RouterModule } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
-    SignUpComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot(authenticationReducer),
-    EffectsModule.forRoot([AuthEffects]),
-    LoginModule
+    LoginModule,
+    RouterModule,
+    CommonModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
+    ReactiveFormsModule
     ],
   providers: [AuthService],
   bootstrap: [AppComponent]

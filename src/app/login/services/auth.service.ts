@@ -9,8 +9,8 @@ import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/firestore';
-import { User } from 'app/models/model';
-// TODO: Remplacer les windows.alert par des toastr
+import { AuthInformations, User } from 'app/shared/models/model';
+import { ToastrService } from 'ngx-toastr';
 @Injectable({
   providedIn: LoginModule,
 })
@@ -21,7 +21,8 @@ export class AuthService {
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
     public router: Router,
-    public ngZone: NgZone
+    public ngZone: NgZone,
+    public toastr: ToastrService
   ) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
@@ -36,24 +37,24 @@ export class AuthService {
   }
 
   // Sign in with email/password
-  SignIn(email, password) {
+  SignIn(authInformations: AuthInformations) {
     return this.afAuth
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(authInformations.email, authInformations.password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['home']);
         });
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        window.alert(error.message);
+        this.toastr.error(error.message);
       });
   }
 
   // Sign up with email/password
-  SignUp(email, password) {
+  SignUp(authInformations: AuthInformations) {
     return this.afAuth
-      .createUserWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(authInformations.email, authInformations.password)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
@@ -61,7 +62,7 @@ export class AuthService {
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        window.alert(error.message);
+        this.toastr.error(error.message);
       });
   }
 
@@ -73,14 +74,14 @@ export class AuthService {
   }
 
   // Reset Forggot password
-  ForgotPassword(passwordResetEmail) {
+  ForgotPassword(authInformations: AuthInformations) {
     return this.afAuth
-      .sendPasswordResetEmail(passwordResetEmail)
+      .sendPasswordResetEmail(authInformations.email)
       .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
+        this.toastr.success('Vous recevrez prochainement un email pour réinitialiser votre mot de passe !');
       })
       .catch((error) => {
-        window.alert(error);
+        this.toastr.error(error);
       });
   }
 
@@ -101,12 +102,12 @@ export class AuthService {
       .signInWithPopup(provider)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['home']);
         });
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        window.alert(error);
+        this.toastr.error(error);
       });
   }
 
