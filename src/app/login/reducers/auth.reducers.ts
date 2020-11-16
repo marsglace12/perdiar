@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { loginCompleteAction, logoutAction } from 'login/actions/auth.actions';
+import { loginCompleteAction, logoutAction } from '../actions/auth.actions';
 import { initialState, State } from './auth.states';
 
 function handleLoginComplete(state: State, action: ReturnType<typeof loginCompleteAction>) : State {

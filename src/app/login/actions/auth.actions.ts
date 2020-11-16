@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from 'models/model';
+import { User } from 'app/models/model';
 
 export enum AuthActionTypes {
   LOGOUT = '[Auth] Logout',

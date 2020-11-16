@@ -15,10 +15,11 @@ export class AuthEffects {
         this.authService.GoogleAuth().pipe(
           map((payload) => {
             return loginCompleteAction({
-              name: payload.user.displayName,
+              displayName: payload.user.displayName,
               email: payload.user.email,
-              picture: payload.user.photoURL,
+              photoURL: payload.user.photoURL,
               uid: payload.user.uid,
+              emailVerified: payload.user.emailVerified
             });
           }),
           catchError(() => EMPTY)

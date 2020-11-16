@@ -102,7 +102,6 @@
       "check-type"
     ],
     "directive-selector": [true, "attribute", ["h"], "camelCase"],
-    "component-selector": [true, "element", ["h"], "kebab-case"],
     "no-output-on-prefix": true,
     "no-inputs-metadata-property": true,
     "no-outputs-metadata-property": true,
